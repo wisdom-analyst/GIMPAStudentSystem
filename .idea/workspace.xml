@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 1: Initial project setup and package structure.">
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Instructor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Manageable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/PolymorphismDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/EnrollmentService.java" afterDir="false" />
+    <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/exception/EntityNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/exception/StudentSystemException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/util/FileManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Enrollment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Instructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/model/Instructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/Main.java" afterDir="false" />
     </list>
@@ -118,7 +115,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776223310743</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Phase 1: Initial project setup and package structure.">
+      <option name="closed" value="true" />
+      <created>1777315482590</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1777315482591</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
+      <option name="closed" value="true" />
+      <created>1777315798838</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1777315798838</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -134,6 +147,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Phase 1: Initial project setup and package structure." />
-    <option name="LAST_COMMIT_MESSAGE" value="Phase 1: Initial project setup and package structure." />
+    <MESSAGE value="Phase 3: Inheritance, polymorphism, enrollment service, updated Main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Phase 3: Inheritance, polymorphism, enrollment service, updated Main" />
   </component>
 </project>
