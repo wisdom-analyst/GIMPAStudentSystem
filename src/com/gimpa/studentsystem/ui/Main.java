@@ -1,92 +1,97 @@
 package com.gimpa.studentsystem.ui;
 
-//import Arraylist
 import com.gimpa.studentsystem.model.Course;
+import com.gimpa.studentsystem.model.Instructor;
+import com.gimpa.studentsystem.model.Person;
 import com.gimpa.studentsystem.model.Student;
 import com.gimpa.studentsystem.service.DataStore;
+import com.gimpa.studentsystem.service.EnrollmentService;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-// Main class - Entry point for the GIMPA Student Management System - Handles all menu display and user interaction
+// Main class - Entry point for the GIMPA Student Management System.
 
 public class Main {
 
-    // input reader
     private static final Scanner scanner = new Scanner(System.in);
 
+
+    /**
+     * Program entry point. Loops the menu until user exits.
+     */
     public static void main(String[] args) {
         System.out.println("╔══════════════════════════════════════╗");
         System.out.println("║   GIMPA STUDENT MANAGEMENT SYSTEM   ║");
         System.out.println("║   OBJECT ORIENTED PROGRAMMING 1     ║");
         System.out.println("╚══════════════════════════════════════╝");
-        System.out.println("   Welcome! Please select an option.   ");
 
         int choice;
 
-        // Main Loop
         do {
-            displayMenu();  // show the menu options
-            choice = getIntInput ("Enter your choice: ");
+            displayMenu();
+            choice = getIntInput("Enter your choice: ");
 
-            // Each case calls a method that handles that menu option
             switch (choice) {
-                case 1:
-                    addStudent();
-                    break;
-                case 2:
-                    addCourse();
-                    break;
-                case 3:
-                    viewAllStudents();
-                    break;
-                case 4:
-                    viewAllCourses();
-                    break;
-                case 5:
-                    searchStudent();
-                    break;
-                case 6:
-                    updateStudent();
-                    break;
-                case 7:
-                    deleteStudent();
-                    break;
-                case 8:
-                    DataStore.displaySummary();
-                    break;
-                case 9:
+                case 1:  addStudent();           break;
+                case 2:  addCourse();            break;
+                case 3:  viewAllStudents();      break;
+                case 4:  viewAllCourses();       break;
+                case 5:  searchStudent();        break;
+                case 6:  updateStudent();        break;
+                case 7:  deleteStudent();        break;
+                case 8:  enrollStudent();        break;
+                case 9:  recordGrade();          break;
+                case 10: viewStudentEnrollments(); break;
+                case 11: viewCourseRoster();     break;
+                case 12: addInstructor();        break;
+                case 13: polymorphismDemo();     break;
+                case 14: DataStore.displaySummary(); break;
+                case 15:
                     System.out.println("\nThank you for using GIMPA SMS. Goodbye!");
                     break;
                 default:
-                    System.out.println("\n[ERROR] Invalid choice. Enter a number between 1-9.");
+                    System.out.println("\n[ERROR] Invalid choice. Enter 1-15.");
             }
 
-        } while (choice != 9);
+        } while (choice != 15);
 
-        scanner.close(); // release the scanner resource when program ends
+        scanner.close();
     }
-//=== MENU ===
-private static void displayMenu() {
-    System.out.println("\n╔══════════════════════════════════════╗");
-    System.out.println("║             MAIN MENU                ║");
-    System.out.println("╠══════════════════════════════════════╣");
-    System.out.println("║  1. Add New Student                  ║");
-    System.out.println("║  2. Add New Course                   ║");
-    System.out.println("║  3. View All Students                ║");
-    System.out.println("║  4. View All Courses                 ║");
-    System.out.println("║  5. Search Student by Name           ║");
-    System.out.println("║  6. Update Student                   ║");
-    System.out.println("║  7. Delete Student                   ║");
-    System.out.println("║  8. View System Summary              ║");
-    System.out.println("║  9. Exit                             ║");
-    System.out.println("╚══════════════════════════════════════╝");
-}
 
-// ====== ADD STUDENT =======
+
+    // ===== MENU =====
+
+    private static void displayMenu() {
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║             MAIN MENU                ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.println("║  --- STUDENT MANAGEMENT ---          ║");
+        System.out.println("║  1.  Add New Student                 ║");
+        System.out.println("║  2.  Add New Course                  ║");
+        System.out.println("║  3.  View All Students               ║");
+        System.out.println("║  4.  View All Courses                ║");
+        System.out.println("║  5.  Search Student by Name          ║");
+        System.out.println("║  6.  Update Student                  ║");
+        System.out.println("║  7.  Delete Student                  ║");
+        System.out.println("║  --- ENROLLMENT & GRADES ---         ║");
+        System.out.println("║  8.  Enroll Student in Course        ║");
+        System.out.println("║  9.  Record Grade                    ║");
+        System.out.println("║  10. View Student Enrollments        ║");
+        System.out.println("║  11. View Course Roster              ║");
+        System.out.println("║  --- STAFF & SYSTEM ---              ║");
+        System.out.println("║  12. Add Instructor                  ║");
+        System.out.println("║  13. Polymorphism Demo               ║");
+        System.out.println("║  14. View System Summary             ║");
+        System.out.println("║  15. Exit                            ║");
+        System.out.println("╚══════════════════════════════════════╝");
+    }
+
+
+    // ===== STUDENT OPERATIONS =====
     private static void addStudent() {
         System.out.println("\n==== ADD NEW STUDENT ====");
-
         try {
             System.out.print("Enter Student ID    : ");
             String studentId = scanner.nextLine();
@@ -103,95 +108,76 @@ private static void displayMenu() {
             System.out.print("Enter Program       : ");
             String program = scanner.nextLine();
 
-            System.out.print("Enter Year (1-4)    : ");
-            int year = getIntInput("");
+            int year = getIntInput("Enter Year (1-4)    : ");
 
-            // Create student object - setters inside constructor validate the data
             Student student = new Student(studentId, name, email, phone, program, year);
 
-            // Send to DataStore - returns false if ID already exists
             if (DataStore.addStudent(student)) {
                 System.out.println("[SUCCESS] Student added successfully!");
             }
 
         } catch (IllegalArgumentException e) {
-            // Catches any validation error thrown by the Student setters
             System.out.println("[ERROR] " + e.getMessage());
         }
     }
 
+    private static void addCourse() {
+        System.out.println("\n==== ADD NEW COURSE ====");
+        try {
+            System.out.print("Enter Course Code   : ");
+            String courseCode = scanner.nextLine();
 
-// ADD COURSE - Collect course details from user and adds to the list
-private static void addCourse() {
-    System.out.println("\n==== ADD NEW COURSE ====");
+            System.out.print("Enter Course Title  : ");
+            String courseTitle = scanner.nextLine();
 
-    try {
-        System.out.print("Enter Course Code   : ");
-        String courseCode = scanner.nextLine();
+            int credits = getIntInput("Enter Credits (1-6) : ");
 
-        System.out.print("Enter Course Title  : ");
-        String courseTitle = scanner.nextLine();
+            System.out.print("Enter Instructor    : ");
+            String instructor = scanner.nextLine();
 
-        int credits = getIntInput("Enter Credits (1-6) : ");
+            Course course = new Course(courseCode, courseTitle, credits, instructor);
 
-        System.out.print("Enter Instructor    : ");
-        String instructor = scanner.nextLine();
+            if (DataStore.addCourse(course)) {
+                System.out.println("[SUCCESS] Course added successfully!");
+            }
 
-        // Create course object - setters validate the data
-        Course course = new Course(courseCode, courseTitle, credits, instructor);
-
-        // Send to DataStore
-        if (DataStore.addCourse(course)) {
-            System.out.println("[SUCCESS] Course added successfully!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] " + e.getMessage());
         }
-
-    } catch (IllegalArgumentException e) {
-        System.out.println("[ERROR] " + e.getMessage());
     }
-}
 
-
-// VIEW ALL STUDENTS
     private static void viewAllStudents() {
         System.out.println("\n===== ALL STUDENTS =====");
-
         ArrayList<Student> students = DataStore.getAllStudents();
 
         if (students.isEmpty()) {
             System.out.println("No students found. Add a student first.");
-            return; // stop the method here - nothing else to do
+            return;
         }
 
         System.out.println("Total Students: " + students.size());
         System.out.println("----------------------------------------");
-
-        // Call each student's displayInfo() to print their details
-        for (Student student : students) {
-            student.displayInfo();
+        for (Student s : students) {
+            s.displayInfo();
         }
     }
 
- // VIEW ALL COURSES - Loop through the courses list and display each one
- private static void viewAllCourses() {
-     System.out.println("\n===== ALL COURSES =====");
+    private static void viewAllCourses() {
+        System.out.println("\n===== ALL COURSES =====");
+        ArrayList<Course> courses = DataStore.getAllCourses();
 
-     ArrayList<Course> courses = DataStore.getAllCourses();
+        if (courses.isEmpty()) {
+            System.out.println("No courses found. Add a course first.");
+            return;
+        }
 
-     if (courses.isEmpty()) {
-         System.out.println("No courses found. Add a course first.");
-         return;
-     }
+        System.out.println("Total Courses: " + courses.size());
+        System.out.println("----------------------------------------");
+        for (Course c : courses) {
+            c.displayInfo();
+        }
+    }
 
-     System.out.println("Total Courses: " + courses.size());
-     System.out.println("----------------------------------------");
-
-     for (Course course : courses) {
-         course.displayInfo();
-     }
- }
-
-
- // SEARCH - Asks user for a name and searches DataStore for matches
     private static void searchStudent() {
         System.out.println("\n===== SEARCH STUDENT =====");
         System.out.print("Enter name to search: ");
@@ -203,28 +189,18 @@ private static void addCourse() {
             System.out.println("No students found matching '" + searchName + "'");
         } else {
             System.out.println("Found " + results.size() + " student(s):");
-            for (Student student : results) {
-                student.displayInfo();
+            for (Student s : results) {
+                s.displayInfo();
             }
         }
     }
-
-
-    // UPDATE STUDENT
-    /**
-     * Finds a student by ID, shows current details,
-     * then lets the user update individual fields.
-     * Pressing Enter without typing keeps the existing value.
-     */
 
     private static void updateStudent() {
         System.out.println("\n===== UPDATE STUDENT =====");
         System.out.print("Enter Student ID to update: ");
         String studentId = scanner.nextLine();
 
-        // Try to find the student first
         Student existing = DataStore.getStudentById(studentId);
-
         if (existing == null) {
             System.out.println("[ERROR] Student not found.");
             return;
@@ -236,7 +212,6 @@ private static void addCourse() {
         try {
             System.out.println("Press Enter to keep current value.");
 
-            // Show current value in brackets - user can type new or press Enter to skip
             System.out.print("Name [" + existing.getName() + "]: ");
             String name = scanner.nextLine();
             if (!name.isEmpty()) existing.setName(name);
@@ -253,7 +228,6 @@ private static void addCourse() {
             String program = scanner.nextLine();
             if (!program.isEmpty()) existing.setProgram(program);
 
-            // Save the updated student back to DataStore
             DataStore.updateStudent(existing);
 
         } catch (IllegalArgumentException e) {
@@ -261,24 +235,17 @@ private static void addCourse() {
         }
     }
 
-    // DELETE STUDENT
-    /**
-     * Finds a student by ID, shows their details,
-     * then asks for confirmation before permanently deleting.
-     */
     private static void deleteStudent() {
         System.out.println("\n===== DELETE STUDENT =====");
         System.out.print("Enter Student ID to delete: ");
         String studentId = scanner.nextLine();
 
         Student student = DataStore.getStudentById(studentId);
-
         if (student == null) {
             System.out.println("[ERROR] Student not found.");
             return;
         }
 
-        // Show who is about to be deleted so user can confirm
         System.out.println("Student to delete:");
         student.displayInfo();
 
@@ -293,18 +260,186 @@ private static void addCourse() {
     }
 
 
-    // INT INPUT - Program react to text inout instead of number
-    private static int getIntInput(String prompt) {
-        System.out.print(prompt);
+    // ===== ENROLLMENT OPERATIONS =====
+    private static void enrollStudent() {
+        System.out.println("\n===== ENROLL STUDENT =====");
+        System.out.print("Enter Student ID  : ");
+        String studentId = scanner.nextLine();
 
-        // hasNextInt() returns false if next input is not a number
-        while (!scanner.hasNextInt()) {
-            System.out.print("Invalid input. Please enter a number: ");
-            scanner.next(); // discard the invalid input and try again
+        System.out.print("Enter Course Code : ");
+        String courseCode = scanner.nextLine();
+
+        // enrollStudent() returns true/false and prints its own messages
+        EnrollmentService.enrollStudent(studentId, courseCode);
+    }
+
+    // Records a percentage grade (0-100) for a student's course.
+    private static void recordGrade() {
+        System.out.println("\n===== RECORD GRADE =====");
+        System.out.print("Enter Student ID  : ");
+        String studentId = scanner.nextLine();
+
+        System.out.print("Enter Course Code : ");
+        String courseCode = scanner.nextLine();
+
+        double grade = getDoubleInput("Enter Grade (0-100): ");
+
+        EnrollmentService.recordGrade(studentId, courseCode, grade);
+    }
+
+    // Shows all courses a student is enrolled in, with grades.
+
+    private static void viewStudentEnrollments() {
+        System.out.println("\n===== STUDENT ENROLLMENTS =====");
+        System.out.print("Enter Student ID: ");
+        String studentId = scanner.nextLine();
+
+        // Verify the student exists before proceeding
+        Student student = DataStore.getStudentById(studentId);
+        if (student == null) {
+            System.out.println("[ERROR] Student not found.");
+            return;
         }
 
+        // Display the full transcript through EnrollmentService
+        EnrollmentService.displayTranscript(studentId);
+    }
+
+    // Shows all students enrolled in a specific course, with grades.
+    private static void viewCourseRoster() {
+        System.out.println("\n===== COURSE ROSTER =====");
+        System.out.print("Enter Course Code: ");
+        String courseCode = scanner.nextLine().toUpperCase();
+
+        // Verify the course exists
+        Course course = DataStore.getCourseByCode(courseCode);
+        if (course == null) {
+            System.out.println("[ERROR] Course not found.");
+            return;
+        }
+
+        System.out.println("\nCourse: " + course.getCourseTitle());
+        System.out.println("Instructor: " + course.getInstructor());
+        System.out.println("----------------------------------------");
+
+        List<Student> enrolled = EnrollmentService.getCourseStudents(courseCode);
+        if (enrolled.isEmpty()) {
+            System.out.println("No students enrolled in this course yet.");
+            return;
+        }
+
+        System.out.println("Enrolled Students: " + enrolled.size());
+        for (Student s : enrolled) {
+            System.out.println("  - " + s.getStudentId() + " | " + s.getName());
+        }
+    }
+
+
+    // ===== INSTRUCTOR =====
+
+    // Adds a new instructor to DataStore.
+    private static void addInstructor() {
+        System.out.println("\n===== ADD INSTRUCTOR =====");
+        try {
+            System.out.print("Enter Employee ID   : ");
+            String employeeId = scanner.nextLine();
+
+            System.out.print("Enter Name          : ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter Email         : ");
+            String email = scanner.nextLine();
+
+            System.out.print("Enter Phone         : ");
+            String phone = scanner.nextLine();
+
+            System.out.print("Enter Department    : ");
+            String department = scanner.nextLine();
+
+            System.out.print("Enter Title (Dr./Prof./Mr./Ms./Mrs.): ");
+            String title = scanner.nextLine();
+
+            Instructor instructor = new Instructor(
+                    employeeId, name, email, phone, department, title);
+
+            if (DataStore.addInstructor(instructor)) {
+                System.out.println("[SUCCESS] Instructor added successfully!");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
+    }
+
+
+    // ===== POLYMORPHISM DEMO =====
+
+    // Demonstrates polymorphism - the core Phase 3 concept.
+
+    private static void polymorphismDemo() {
+        System.out.println("\n===== POLYMORPHISM DEMO =====");
+        System.out.println("Creating a Student and Instructor as Person references...\n");
+
+        // Both variables are declared as type Person
+        // but hold different actual object types
+        Person student = new Student(
+                "DEMO001", "Ama Owusu", "ama@gimpa.edu.gh",
+                "0241234567", "Computer Science", 2);
+
+        Person instructor = new Instructor(
+                "EMP001", "Kofi Asante", "kofi@gimpa.edu.gh",
+                "0209876543", "Computer Science", "Dr.");
+
+        System.out.println("--- Calling printPersonDetails() on BOTH ---");
+        System.out.println("Same method, different behaviour based on actual type:\n");
+
+        // One method handles both types - this is polymorphism in action
+        printPersonDetails(student);
+        printPersonDetails(instructor);
+
+        // Array holding mixed Person types
+        System.out.println("\n--- Looping through a Person array ---");
+        Person[] people = {student, instructor};
+        for (Person p : people) {
+            // getRole() returns "STUDENT" or "INSTRUCTOR"
+            // Java picks the right version at runtime
+            System.out.println(p.getRole() + " → " + p.getName());
+        }
+    }
+
+    // Accepts ANY Person object - Student, Instructor, or any future subclass.
+    private static void printPersonDetails(Person person) {
+        System.out.println("Role: " + person.getRole());
+        System.out.println("Name: " + person.getName());
+        person.displayInfo(); // correct version called automatically
+        System.out.println();
+    }
+
+
+    // ===== HELPER METHODS =====
+
+    // Safely reads an integer. Keeps asking if user types non-numeric input.
+
+    private static int getIntInput(String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextInt()) {
+            System.out.print("Invalid input. Please enter a number: ");
+            scanner.next();
+        }
         int input = scanner.nextInt();
-        scanner.nextLine(); // consume the leftover newline character
+        scanner.nextLine(); // consume leftover newline
+        return input;
+    }
+
+    // Safely reads a decimal number. Used for grade entry.
+    private static double getDoubleInput(String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextDouble()) {
+            System.out.print("Invalid input. Please enter a number: ");
+            scanner.next();
+        }
+        double input = scanner.nextDouble();
+        scanner.nextLine();
         return input;
     }
 

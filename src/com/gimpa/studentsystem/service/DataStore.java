@@ -1,6 +1,7 @@
 package com.gimpa.studentsystem.service;
 import com.gimpa.studentsystem.model.Course;
 import com.gimpa.studentsystem.model.Student;
+import com.gimpa.studentsystem.model.Instructor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +91,9 @@ public class DataStore {
         return studentMap.size();
     }
 
-    // COURSE OPERATION - add a new course to the system
+
+
+    //===== COURSE OPERATION ====== add a new course to the system
     public static boolean addCourse(Course course) {
         String courseCode = course.getCourseCode();
 
@@ -149,13 +152,45 @@ public class DataStore {
         return courseMap.size();
     }
 
+
+    // ===== INSTRUCTOR STORAGE =====
+
+    private static HashMap<String, Instructor> instructorMap = new HashMap<>();
+
+    // Add the import at the top of DataStore:
+    // import com.gimpa.studentsystem.model.Instructor;
+
+    public static boolean addInstructor(Instructor instructor) {
+        String id = instructor.getEmployeeId();
+        if (instructorMap.containsKey(id)) {
+            System.out.println("[ERROR] Instructor ID " + id + " already exists.");
+            return false;
+        }
+        instructorMap.put(id, instructor);
+        System.out.println("[SUCCESS] Instructor added: " + instructor.getName());
+        return true;
+    }
+
+    public static Instructor getInstructorById(String id) {
+        return instructorMap.get(id);
+    }
+
+    public static ArrayList<Instructor> getAllInstructors() {
+        return new ArrayList<>(instructorMap.values());
+    }
+
+    public static int getInstructorCount() {
+        return instructorMap.size();
+    }
+
     // SYSTEM SUMMARY - Prints a quick overview of how much data is in the system
     public static void displaySummary() {
         System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║          SYSTEM SUMMARY              ║");
         System.out.println("╠══════════════════════════════════════╣");
-        System.out.printf( "║  Total Students : %-18d ║%n", studentMap.size());
-        System.out.printf( "║  Total Courses  : %-18d ║%n", courseMap.size());
+        System.out.printf( "║  Total Students    : %-15d ║%n", studentMap.size());
+        System.out.printf( "║  Total Courses     : %-15d ║%n", courseMap.size());
+        System.out.printf( "║  Total Instructors : %-15d ║%n", instructorMap.size());
         System.out.println("╚══════════════════════════════════════╝");
     }
 
