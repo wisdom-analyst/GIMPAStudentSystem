@@ -30,8 +30,8 @@ public class PolymorphismDemo {
 
         Person instructor1 = new Instructor(
                 "EMP001",
-                "Daniel Apuri",
-                "apuri@gimpa.edu.gh",
+                "Qwame Skele",
+                "skele@gimpa.edu.gh",
                 "0201234567",
                 "Computer Science",
                 "Dr."
@@ -39,8 +39,8 @@ public class PolymorphismDemo {
 
         Person student2 = new Student(
                 "GIMPA002",
-                "Ama Owusu",
-                "ama@gmail.com",
+                "Ohene Asiedu",
+                "ohene@gmail.com",
                 "0277654321",
                 "Information Technology",
                 1
@@ -93,8 +93,8 @@ public class PolymorphismDemo {
         }
 
         System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║     DEMONSTRATION COMPLETE           ║");
-        System.out.println("╚══════════════════════════════════════╝");
+        System.out.println("  ║     DEMONSTRATION COMPLETE           ║");
+        System.out.println("  ╚══════════════════════════════════════╝");
     }
 }
 

@@ -18,8 +18,8 @@ public class Main {
         FileManager.loadAllData();
 
         System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║   GIMPA STUDENT MANAGEMENT SYSTEM   ║");
-        System.out.println("║   PHASE 5: EXCEPTIONS & FILES      ║");
+        System.out.println("║   GIMPA STUDENT MANAGEMENT SYSTEM    ║");
+        System.out.println("║   PHASE 5: EXCEPTIONS & FILES        ║");
         System.out.println("╚══════════════════════════════════════╝");
 
         int choice = 0;
@@ -63,7 +63,7 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("\n╔════════════════════════════════════╗");
         System.out.println("║             MAIN MENU                ║");
         System.out.println("╠══════════════════════════════════════╣");
         System.out.println("║  1. Add Student    | 8. Enroll       ║");
