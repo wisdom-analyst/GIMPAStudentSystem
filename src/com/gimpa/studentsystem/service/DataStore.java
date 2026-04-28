@@ -176,4 +176,15 @@ public class DataStore {
     public static boolean isEmpty() {
         return studentMap.isEmpty() && courseMap.isEmpty() && instructorMap.isEmpty();
     }
+
+
+    // returns null instead of throwing exception — safe for GUI use
+    public static Student findStudentById(String studentId) {
+        return studentMap.get(studentId);
+    }
+
+    // returns null instead of throwing exception — safe for GUI use
+    public static Course findCourseByCode(String courseCode) {
+        return courseMap.get(courseCode);
+    }
 }
