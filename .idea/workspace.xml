@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/CourseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/EnrollmentTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/StudentTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GIMPAStudentSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GIMPAStudentSystem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/StatusBar.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +67,7 @@
     "Application.PolymorphismDemo.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
     "JUnit.CourseTest.executor": "Run",
+    "JUnit.DataStoreTest.executor": "Run",
     "JUnit.EnrollmentTest.executor": "Run",
     "JUnit.StudentTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -91,7 +88,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.DataStoreTest">
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.ui.MainFrame" />
       <module name="GIMPAStudentSystem" />
@@ -167,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainFrame" />
         <item itemvalue="JUnit.DataStoreTest" />
         <item itemvalue="JUnit.EnrollmentTest" />
         <item itemvalue="JUnit.CourseTest" />
         <item itemvalue="JUnit.StudentTest" />
-        <item itemvalue="Application.MainFrame" />
       </list>
     </recent_temporary>
   </component>

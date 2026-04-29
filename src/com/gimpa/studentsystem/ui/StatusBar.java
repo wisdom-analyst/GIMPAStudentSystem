@@ -6,17 +6,16 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-// StatusBar — bottom bar showing status messages and live clock.
+/**
+ * StatusBar — bottom bar showing status messages, branding and live clock.
+ * Phase 6 - GUI Development
+ */
 public class StatusBar extends JPanel {
 
-    // label that shows status messages on the left
     private final JLabel messageLabel;
-
-    // label that shows the live clock on the right
     private final JLabel timeLabel;
 
 
-    // ===== CONSTRUCTOR =====
     public StatusBar() {
         setLayout(new BorderLayout());
         setBackground(MainFrame.COLOR_PANEL);
@@ -27,10 +26,17 @@ public class StatusBar extends JPanel {
         setPreferredSize(new Dimension(getWidth(), 35));
 
         // ── Left — status message ──
-        messageLabel = new JLabel("Ready");
+        messageLabel = new JLabel("  Ready");
         messageLabel.setFont(MainFrame.FONT_SMALL);
         messageLabel.setForeground(MainFrame.COLOR_TEXT_DIM);
         add(messageLabel, BorderLayout.WEST);
+
+        // ── Center — branding ──
+        JLabel brandLabel = new JLabel(
+                "Powered by Wisdom (Skele)", SwingConstants.CENTER);
+        brandLabel.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        brandLabel.setForeground(MainFrame.COLOR_ACCENT);
+        add(brandLabel, BorderLayout.CENTER);
 
         // ── Right — live clock ──
         timeLabel = new JLabel();
@@ -38,28 +44,25 @@ public class StatusBar extends JPanel {
         timeLabel.setForeground(MainFrame.COLOR_TEXT_DIM);
         add(timeLabel, BorderLayout.EAST);
 
-        // timer updates the clock every second
+        // updates clock every second
         Timer timer = new Timer(1000, e -> updateClock());
         timer.start();
-        updateClock(); // show immediately on load
+        updateClock();
     }
 
 
-    // updates the clock label with current time
     private void updateClock() {
         String time = LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("EEE dd MMM yyyy  HH:mm:ss"));
+                .format(DateTimeFormatter.ofPattern(
+                        "EEE dd MMM yyyy  HH:mm:ss"));
         timeLabel.setText(time);
     }
 
 
-    // shows a message in the status bar
-    // green for success, red for error
     public void setMessage(String message, boolean success) {
         messageLabel.setText("  " + message);
         messageLabel.setForeground(
-                success ? MainFrame.COLOR_SUCCESS : MainFrame.COLOR_ERROR
-        );
+                success ? MainFrame.COLOR_SUCCESS : MainFrame.COLOR_ERROR);
 
         // reset back to default after 4 seconds
         Timer reset = new Timer(4000, e -> {
