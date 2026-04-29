@@ -12,24 +12,24 @@ import java.awt.event.WindowEvent;
     public class MainFrame extends JFrame {
 
         // ===== COLOR SCHEME =====
-        public static final Color COLOR_BG           = new Color(18, 18, 28);    // dark background
-        public static final Color COLOR_PANEL        = new Color(28, 28, 42);    // panel background
-        public static final Color COLOR_ACCENT       = new Color(99, 102, 241);  // purple accent
+        public static final Color COLOR_BG = new Color(18, 18, 28);    // dark background
+        public static final Color COLOR_PANEL = new Color(28, 28, 42);    // panel background
+        public static final Color COLOR_ACCENT = new Color(99, 102, 241);  // purple accent
         public static final Color COLOR_ACCENT_HOVER = new Color(129, 140, 248); // lighter purple
-        public static final Color COLOR_TEXT         = new Color(226, 232, 240); // light text
-        public static final Color COLOR_TEXT_DIM     = new Color(148, 163, 184); // dimmed text
-        public static final Color COLOR_SUCCESS      = new Color(34, 197, 94);   // green
-        public static final Color COLOR_ERROR        = new Color(239, 68, 68);   // red
-        public static final Color COLOR_BORDER       = new Color(51, 51, 74);    // border color
+        public static final Color COLOR_TEXT = new Color(226, 232, 240); // light text
+        public static final Color COLOR_TEXT_DIM = new Color(148, 163, 184); // dimmed text
+        public static final Color COLOR_SUCCESS = new Color(34, 197, 94);   // green
+        public static final Color COLOR_ERROR = new Color(239, 68, 68);   // red
+        public static final Color COLOR_BORDER = new Color(51, 51, 74);    // border color
         public static final Color COLOR_TABLE_HEADER = new Color(45, 45, 65);    // table header
 
 
         // ===== FONT SCHEME =====
-        public static final Font FONT_TITLE   = new Font("Segoe UI", Font.BOLD, 20);
+        public static final Font FONT_TITLE = new Font("Segoe UI", Font.BOLD, 20);
         public static final Font FONT_HEADING = new Font("Segoe UI", Font.BOLD, 14);
         public static final Font FONT_REGULAR = new Font("Segoe UI", Font.PLAIN, 13);
-        public static final Font FONT_SMALL   = new Font("Segoe UI", Font.PLAIN, 11);
-        public static final Font FONT_MONO    = new Font("Consolas", Font.PLAIN, 12);
+        public static final Font FONT_SMALL = new Font("Segoe UI", Font.PLAIN, 11);
+        public static final Font FONT_MONO = new Font("Consolas", Font.PLAIN, 12);
 
 
         // ===== PANELS =====
@@ -145,15 +145,15 @@ import java.awt.event.WindowEvent;
             tabbedPane.setFont(FONT_HEADING);
 
             // create all panels
-            studentPanel    = new StudentPanel(this);
-            coursePanel     = new CoursePanel(this);
+            studentPanel = new StudentPanel(this);
+            coursePanel = new CoursePanel(this);
             enrollmentPanel = new EnrollmentPanel(this);
-            reportPanel     = new ReportPanel(this);
+            reportPanel = new ReportPanel(this);
 
-            tabbedPane.addTab("👤  Students",    studentPanel);
-            tabbedPane.addTab("📚  Courses",     coursePanel);
+            tabbedPane.addTab("👤  Students", studentPanel);
+            tabbedPane.addTab("📚  Courses", coursePanel);
             tabbedPane.addTab("📋  Enrollments", enrollmentPanel);
-            tabbedPane.addTab("📊  Reports",     reportPanel);
+            tabbedPane.addTab("📊  Reports", reportPanel);
 
             // main layout
             JPanel mainPanel = new JPanel(new BorderLayout());
@@ -313,20 +313,36 @@ import java.awt.event.WindowEvent;
             return badge;
         }
 
-
-        // ===== MAIN METHOD ===== This launches the GUI — replaces the old console Main.java
+        // APPLICATION ENTRY POINT
         public static void main(String[] args) {
-            // run GUI on the Event Dispatch Thread — required by Swing
             SwingUtilities.invokeLater(() -> {
 
-                // try to load saved data before showing the window
+                // DO NOT set system look and feel
+                // it overrides our custom dark theme and button colors
+                try {
+                    UIManager.setLookAndFeel(
+                            UIManager.getCrossPlatformLookAndFeelClassName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // load saved data before showing login
                 try {
                     FileManager.loadData();
                 } catch (Exception e) {
                     System.out.println("No saved data found. Starting fresh.");
                 }
 
-                new MainFrame();
+                // show login dialog first
+                LoginDialog loginDialog = new LoginDialog();
+                loginDialog.setVisible(true);
+
+                if (loginDialog.isLoginSuccessful()) {
+                    new MainFrame();
+                } else {
+                    System.out.println("Login cancelled. Exiting system.");
+                    System.exit(0);
+                }
             });
         }
     }

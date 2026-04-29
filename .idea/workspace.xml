@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/CourseDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/CoursePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/EnrollmentPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/ReportPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/StatusBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/StudentDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/StudentPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/LoginDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/util/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/util/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
