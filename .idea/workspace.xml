@@ -10,14 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/GIMPAStudentSystem_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/database/DatabaseManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/CourseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/EnrollmentTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/test/StudentTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GIMPAStudentSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GIMPAStudentSystem.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/EnrollmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/EnrollmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +70,9 @@
     "Application.MainFrame.executor": "Run",
     "Application.PolymorphismDemo.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
+    "JUnit.CourseTest.executor": "Run",
+    "JUnit.EnrollmentTest.executor": "Run",
+    "JUnit.StudentTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -90,7 +91,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.DataStoreTest">
     <configuration name="MainFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.ui.MainFrame" />
       <module name="GIMPAStudentSystem" />
@@ -104,8 +105,72 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CourseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GIMPAStudentSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gimpa.studentsystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gimpa.studentsystem.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.test.CourseTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataStoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GIMPAStudentSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gimpa.studentsystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gimpa.studentsystem.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.test.DataStoreTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EnrollmentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GIMPAStudentSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gimpa.studentsystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gimpa.studentsystem.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.test.EnrollmentTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GIMPAStudentSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gimpa.studentsystem.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gimpa.studentsystem.test" />
+      <option name="MAIN_CLASS_NAME" value="com.gimpa.studentsystem.test.StudentTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DataStoreTest" />
+        <item itemvalue="JUnit.EnrollmentTest" />
+        <item itemvalue="JUnit.CourseTest" />
+        <item itemvalue="JUnit.StudentTest" />
         <item itemvalue="Application.MainFrame" />
       </list>
     </recent_temporary>
