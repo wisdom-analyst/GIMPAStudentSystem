@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GIMPAStudentSystem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GIMPAStudentSystem_jar</output-path>
+    <root id="archive" name="GIMPAStudentSystem.jar">
+      <element id="module-output" name="GIMPAStudentSystem" />
+    </root>
+  </artifact>
+</component>

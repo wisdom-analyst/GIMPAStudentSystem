@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="GIMPAStudentSystem:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5eb28b80-ffeb-44ab-bf1c-cdc6e71673e1" name="Changes" comment="Phase 3: Inheritance, polymorphism, enrollment service, updated Main">
-      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/LoginDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/GIMPAStudentSystem_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/database/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GIMPAStudentSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GIMPAStudentSystem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/DataStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/EnrollmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/service/EnrollmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gimpa/studentsystem/ui/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +71,11 @@
     "Application.Main.executor": "Run",
     "Application.MainFrame.executor": "Run",
     "Application.PolymorphismDemo.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -69,6 +83,9 @@
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/USER/Desktop/Qwame prog/GIMPAstudentSystem/GIMPAStudentSystem/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
     "vue.rearranger.settings.migration": "true"
   }

@@ -1,53 +1,105 @@
 package com.gimpa.studentsystem.service;
 
+import com.gimpa.studentsystem.database.DatabaseManager;
 import com.gimpa.studentsystem.model.Course;
 import com.gimpa.studentsystem.model.Enrollment;
 import com.gimpa.studentsystem.model.Student;
-import com.gimpa.studentsystem.exception.EntityNotFoundException; // NEW IMPORT
+import com.gimpa.studentsystem.exception.EntityNotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * EnrollmentService — handles all enrollment operations.
+ * Now integrated with SQLite database for persistent storage.
+ * JDBC Database Integration
+ */
 public class EnrollmentService {
 
-    private static HashMap<String, ArrayList<Enrollment>> studentEnrollments = new HashMap<>();
+    private static HashMap<String, ArrayList<Enrollment>> studentEnrollments
+            = new HashMap<>();
     private static ArrayList<Enrollment> allEnrollments = new ArrayList<>();
 
-    // === ENROLL STUDENT ===
+
+    // ===== DATABASE INITIALIZATION =====
+
+    // loads all enrollments from database into memory
+    // called once on startup after students and courses are loaded
+    public static void loadEnrollmentsFromDatabase() {
+        List<String[]> rawEnrollments = DatabaseManager.loadAllEnrollments();
+
+        for (String[] row : rawEnrollments) {
+            String studentId  = row[0];
+            String courseCode = row[1];
+            double grade      = Double.parseDouble(row[2]);
+            boolean isGraded  = row[3].equals("1");
+
+            try {
+                // get student and course objects from DataStore
+                Student student = DataStore.getStudentById(studentId);
+                Course course   = DataStore.getCourseByCode(courseCode);
+
+                // rebuild enrollment object
+                Enrollment enrollment = new Enrollment(student, course);
+                if (isGraded) {
+                    enrollment.setGrade(grade);
+                }
+
+                // add to memory
+                allEnrollments.add(enrollment);
+                studentEnrollments
+                        .computeIfAbsent(studentId, k -> new ArrayList<>())
+                        .add(enrollment);
+
+            } catch (EntityNotFoundException e) {
+                System.out.println("[DATABASE] Skipped enrollment — "
+                        + e.getMessage());
+            }
+        }
+
+        System.out.println("[DATABASE] Enrollments loaded: "
+                + allEnrollments.size());
+    }
+
+
+    // ===== ENROLL STUDENT =====
+
     public static boolean enrollStudent(String studentId, String courseCode) {
         try {
-            // Phase 5: These calls now throw exceptions if not found
             Student student = DataStore.getStudentById(studentId);
-            Course course = DataStore.getCourseByCode(courseCode);
+            Course course   = DataStore.getCourseByCode(courseCode);
 
-            // Check for duplicate enrollment
+            // check for duplicate enrollment
             if (isEnrolled(studentId, courseCode)) {
                 System.out.println("[ERROR] " + student.getName()
                         + " is already enrolled in " + course.getCourseTitle());
                 return false;
             }
 
-            // Create the enrollment and save it
+            // create enrollment and save to memory
             Enrollment enrollment = new Enrollment(student, course);
             allEnrollments.add(enrollment);
-
             studentEnrollments
                     .computeIfAbsent(studentId, k -> new ArrayList<>())
                     .add(enrollment);
+
+            // save to database
+            DatabaseManager.insertEnrollment(studentId, courseCode);
 
             System.out.println("[SUCCESS] " + student.getName()
                     + " enrolled in " + course.getCourseTitle());
             return true;
 
         } catch (EntityNotFoundException e) {
-            // Instead of manual null checks, we catch the custom exception here
             System.out.println("[ERROR] " + e.getMessage());
             return false;
         }
     }
 
-    // == CHECK ENROLLMENT ==
+
+    // ===== CHECK ENROLLMENT =====
+
     public static boolean isEnrolled(String studentId, String courseCode) {
         for (Enrollment enrollment : allEnrollments) {
             if (enrollment.getStudent().getStudentId().equals(studentId)
@@ -58,8 +110,12 @@ public class EnrollmentService {
         return false;
     }
 
-    // == RECORD GRADE ==
-    public static boolean recordGrade(String studentId, String courseCode, double grade) {
+
+    // ===== RECORD GRADE =====
+
+    public static boolean recordGrade(String studentId,
+                                      String courseCode,
+                                      double grade) {
         if (grade < 0 || grade > 100) {
             System.out.println("[ERROR] Grade must be between 0 and 100.");
             return false;
@@ -69,18 +125,26 @@ public class EnrollmentService {
             if (enrollment.getStudent().getStudentId().equals(studentId)
                     && enrollment.getCourse().getCourseCode().equals(courseCode)) {
 
+                // update in memory
                 enrollment.setGrade(grade);
+
+                // update in database
+                DatabaseManager.updateGrade(studentId, courseCode, grade);
+
                 System.out.println("[SUCCESS] Grade " + grade + " recorded for "
                         + enrollment.getStudent().getName());
                 return true;
             }
         }
 
-        System.out.println("[ERROR] No enrollment found for student " + studentId + " in course " + courseCode);
+        System.out.println("[ERROR] No enrollment found for student "
+                + studentId + " in course " + courseCode);
         return false;
     }
 
-    // === RETRIEVE ENROLLMENT ===
+
+    // ===== RETRIEVE ENROLLMENTS =====
+
     public static ArrayList<Enrollment> getStudentEnrollments(String studentId) {
         return studentEnrollments.getOrDefault(studentId, new ArrayList<>());
     }
@@ -99,16 +163,18 @@ public class EnrollmentService {
         return new ArrayList<>(allEnrollments);
     }
 
-    // === GPA CALCULATION ===
+
+    // ===== GPA CALCULATION =====
+
     public static double calculateGPA(String studentId) {
         ArrayList<Enrollment> enrollments = getStudentEnrollments(studentId);
         double totalPoints = 0;
-        int totalCredits = 0;
+        int totalCredits   = 0;
 
         for (Enrollment enrollment : enrollments) {
             if (enrollment.isGraded()) {
                 double gradePoint = convertToGradePoint(enrollment.getGrade());
-                int credits = enrollment.getCourse().getCredits();
+                int credits       = enrollment.getCourse().getCredits();
                 totalPoints += gradePoint * credits;
                 totalCredits += credits;
             }
@@ -140,36 +206,37 @@ public class EnrollmentService {
         return "F";
     }
 
+
     // ===== TRANSCRIPT =====
+
     public static void displayTranscript(String studentId) {
         try {
-            // Phase 5 Update: Using try-catch for student retrieval
             Student student = DataStore.getStudentById(studentId);
-
             ArrayList<Enrollment> enrollments = getStudentEnrollments(studentId);
 
             System.out.println("\n╔══════════════════════════════════════════════╗");
             System.out.println("║          GIMPA STUDENT TRANSCRIPT            ║");
             System.out.println("╠══════════════════════════════════════════════╣");
-            System.out.printf( "║  Student : %-33s ║%n", student.getName());
-            System.out.printf( "║  ID      : %-33s ║%n", student.getStudentId());
-            System.out.printf( "║  Program : %-33s ║%n", student.getProgram());
-            System.out.printf( "║  Year    : %-33d ║%n", student.getYearOfStudy());
+            System.out.printf("║  Student : %-33s ║%n", student.getName());
+            System.out.printf("║  ID      : %-33s ║%n", student.getStudentId());
+            System.out.printf("║  Program : %-33s ║%n", student.getProgram());
+            System.out.printf("║  Year    : %-33d ║%n", student.getYearOfStudy());
             System.out.println("╠══════════════════════════════════════════════╣");
             System.out.println("║  Code       │ Title              │ Cr │ Grade ║");
             System.out.println("╠══════════════════════════════════════════════╣");
 
             double totalPoints = 0;
-            int totalCredits = 0;
+            int totalCredits   = 0;
 
             for (Enrollment enrollment : enrollments) {
-                Course course = enrollment.getCourse();
-                int credits = course.getCredits();
-
+                Course course  = enrollment.getCourse();
+                int credits    = course.getCredits();
                 String gradeDisplay;
+
                 if (enrollment.isGraded()) {
                     gradeDisplay = getLetterGrade(enrollment.getGrade());
-                    totalPoints += convertToGradePoint(enrollment.getGrade()) * credits;
+                    totalPoints += convertToGradePoint(
+                            enrollment.getGrade()) * credits;
                     totalCredits += credits;
                 } else {
                     gradeDisplay = "Pending";
@@ -186,7 +253,7 @@ public class EnrollmentService {
 
             System.out.println("╠══════════════════════════════════════════════╣");
             double gpa = totalCredits > 0 ? totalPoints / totalCredits : 0.0;
-            System.out.printf( "║  GPA: %-39.2f ║%n", gpa);
+            System.out.printf("║  GPA: %-39.2f ║%n", gpa);
             System.out.println("╚══════════════════════════════════════════════╝");
 
         } catch (EntityNotFoundException e) {
